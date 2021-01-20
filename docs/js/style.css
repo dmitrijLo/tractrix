@@ -1,0 +1,65 @@
+/* #hmi {
+    min-width: 150px;
+    background-color: #648181;
+    border: 1px solid black;
+    border-radius: 0px 25px 0px 25px; 
+    box-shadow: 10px 5px 1.5px black;
+    overflow: hidden;
+} */
+
+.hmi-lvl2-label {
+    color: #E2DDDB;
+    height: 1.25em;
+    background-color: #58595B;
+    padding-left: 0.25em;
+}
+
+.hmi-lvl2-content {
+    border-top: 1px solid black;
+    display: inline-block;
+    padding: 0.1em 0px 0.1em 0px;
+}
+
+.hmi-lvl4-label {
+    padding-left: 0.25em;
+    float: left;
+    max-width: 40%;
+}
+
+.hmi-lvl4-content {
+    float: right;
+    max-width: 60%;
+}
+
+.hmi-lvl4-label, .hmi-lvl4-content {
+    height: auto;
+    color: #1a1a1a;
+    font-family: inherit;
+    font-size: 1em;
+    margin-bottom: 0.1em;
+}
+
+
+.hmi-lvl4-content > input {
+    color: #1a1a1a;
+    font-family: inherit;
+    font-size: 0.75em;
+    /*padding: 0.15em 0px;*/
+    background-color: #C8D6C7;
+    text-align: center;
+    border: 1px solid #C8D6C7;
+    border-radius: 3px;
+    width: 90%;
+}
+
+input[type="number"] {
+    -webkit-appearance: textfield;
+       -moz-appearance: textfield;
+            appearance: textfield;
+  }
+  
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
