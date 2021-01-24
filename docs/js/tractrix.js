@@ -25,7 +25,7 @@ const mec = {
         this._interactor = canvasInteractor.create(this.ctx, state);
         this._selector = g2.selector(this._interactor.evt);
         this._interactor.on('tick', e => this.ontick(e))
-                        //.on('pan', e => this.onpan(e))
+                        .on('pan', e => this.onpan(e))
                         .on('drag', e => this.ondrag(e))
                         .on('pointerdown', e => this.onpointerdown(e))
                         //.on('pointermove', e => this.onpointermove(e))
@@ -42,37 +42,31 @@ const mec = {
     ontick(e) {
 /*         if (this.interactive)
             this._g.exe(this._selector); */
-        this.world.exe(this._selector).ply({pts: this.spline,ls:'blue',lw:3}).exe(this.ctx);
+        this.world.exe(this._selector).exe(this.ctx);
     },
     onpan(e) { 
-        this._interactor.view.x += e.dx;
-        this._interactor.view.y += e.dy;
-         
+        //this._interactor.view.x += e.dx;
+        //this._interactor.view.y += e.dy;
+        this.spline.push({x:e.x,y:e.y})
+        if(this.spline.length >= 100){
+            this.spline.shift();
+        }
         console.log(this._selector)
     },
     ondrag(e) {    // only modify selected geometry here .. do not redraw .. !
         if (this._selector.selection && this._selector.selection.drag) {
             this._selector.selection.drag({x:e.xusr,y:e.yusr,dx:e.dxusr,dy:e.dyusr,mode:'drag'});
-        }  
+        } 
+        
     },
     onpointerdown(e){
-        this.flags.dirty = true;     
-        console.log(this.flags.dirty);
-        this._interactor.on('pointermove', e => mec.onpointermove(e))
-                        .on('pointerup', mec.onpointerup());
-        console.log(this._interactor.signals)         
+        this.world.ply({pts: this.spline,ls:'blue',lw:3});  
     },
     onpointermove(e){
-        if(this.flags.dirty) {
-            this.spline.push({x:e.x,y:e.y});
-        }
+        if(this.flags.dirty) this.spline.push({x:e.x,y:e.y});
     },
     onpointerup(){
-        console.log(this.spline)
-        this.flags.dirty = false;
-        console.log(this.flags.dirty);
-        this._interactor.remove('pointermove', mec.onpointermove)
-                        .remove('pointerup', mec.onpointerup);
+        
     }
     /* onwheel(e) {
         this._interactor.view.x = e.x + e.dscl*(this._interactor.view.x - e.x);
