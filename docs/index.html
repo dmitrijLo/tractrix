@@ -4,16 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schleppkurven</title>
+    <script src="../cstr/cstr.js"></script>
     <script src="./js/canvasInteractor.js"></script>
     <script src="./js/g2.core.js"></script>
     <script src="./js/g2.lib.js"></script>
     <script src="./js/g2.ext.js"></script>
     <script src="./js/g2.selector.js"></script>
+    <script src="./js/g2.mec.js"></script>
+    <script src="./js/v2.js"></script>
 </head>
 <body>
-    <canvas id="c" width="800" height="600" style="border-width:1px;border-style:solid"></canvas>
-
-    <script src="./js/tractrix.js"></script>
-    <script src="./js/hmi.html.js"></script>
+    <main style="width:600px">
+        <canvas id="c" width="1200" height="800" style="border-width:1px;border-style:solid"></canvas>
+        <ctrl-ing ref="model">
+        {
+            "add":[
+                { "toggle": {"label":"Geradeausfahrt"},"path":"_isActive"},
+                { "slider": {"label":"Lenkwinkel","min":-60,"max":60},"path":"steeringAngle"}
+            ]
+        }
+        </ctrl-ing>
+    </main>
+    
+    <script src="./js/trajectory.js"></script>
+    <script src="../../ctrling/src/ctrling.js"></script>
 </body>
 </html>
